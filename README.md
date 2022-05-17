@@ -1,8 +1,8 @@
 # imgSmoothingCP2
 ### What is it? 
-School project to take an image in the BMP file format and smoothe it.
+School project to take an image in the BMP file format and do image processing on it.
 
-![image](https://user-images.githubusercontent.com/94362354/165052845-aa8ee538-372f-45e4-acbc-b4e63c195531.png)
+![image](https://user-images.githubusercontent.com/94362354/168565168-af57a563-30ec-4f7a-b5f6-b90ce03fad1d.png)
 
 ### Made by
 https://github.com/indy2013
@@ -16,4 +16,6 @@ https://www.tutorialspoint.com/c_standard_library/c_function_fwrite.htm
 
 https://lmcnulty.me/words/bmp-output/
 
+https://docs.fileformat.com/image/bmp/
 
+https://www.youtube.com/watch?v=UaQjGziw71E
