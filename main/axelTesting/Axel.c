@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define BMPINPUT "inputImageBig.bmp"
+#define BMPINPUT "inputImage.bmp"
 #define BMPOUTPUT "outputImage.bmp"
 
 void imageSmoothing (unsigned char *,signed int,signed int,int);
@@ -91,29 +91,11 @@ int main(int argc, char const *argv[])
 
 void imageSmoothing (unsigned char * originalImagePixels,signed int inputHeight,signed int inputWidth,int totalPixelsOriginal)
 {   
-    //For loop to itterate trough the height of the image.
-    for (int y = 0; inputHeight<y; y++)
-    {   
-        //Checks if the image is either in the first or last line of height.
-        if(y == 0 || y == inputHeight) 
-        {
-            //Do nothing, we ingore the first and last line.
-        }
-        //If we arent on the first or last line do this.
-        else
-        {
-            for (int x = 0; inputWidth<x; x++)
-            {
-                if(x == 0 || x == inputWidth) 
-                {
-                    //Do nothing, we ingore the first and last line.
-                }
-                //If we arent on the first or last line do this.
-                else
-                {
-                    /* CODE */
-                }
-            }
-        }
+    int counter = 0;
+    while(counter != (totalPixelsOriginal*3)+1)
+    {
+           
     }
+    
+    printf("\n\n\n\n%d\n",totalPixelsOriginal);
 }
