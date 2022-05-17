@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define BMPINPUT "inputImage.bmp"
+#define BMPINPUT "inputImageBig.bmp"
 #define BMPOUTPUT "outputImage.bmp"
 
 void editImage (unsigned char *,signed int,signed int,int);
@@ -79,11 +79,30 @@ int main(int argc, char const *argv[])
 }
 
 void editImage(unsigned char * originalImagePixels,signed int inputHeight,signed int inputWidth,int totalPixelsOriginal)
-{
-    for (int i = 0; i < totalPixelsOriginal*3; i++)
-    {
-        printf("Pixel %d = 0x%x\n",i+1,originalImagePixels[i]);
-        originalImagePixels[i] = 255;
+{   
+    //For loop to itterate trough the height of the image.
+    for (y = 0, inputHeight<y, y++)
+    {   
+        //Checks if the image is either in the first or last line of height.
+        if(y == 0 || y == inputHeight) 
+        {
+            //Do nothing, we ingore the first and last line.
+        }
+        //If we arent on the first or last line do this.
+        else
+        {
+            for (x = 0, inputWidth<x, x++)
+            {
+                if(x == 0 || x == inputWidth) 
+                {
+                    //Do nothing, we ingore the first and last line.
+                }
+                //If we arent on the first or last line do this.
+                else
+                {
+                    /* CODE */
+                }
+            }
+        }
     }
-    
 }
