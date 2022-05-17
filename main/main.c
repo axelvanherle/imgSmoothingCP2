@@ -4,7 +4,7 @@
 #define BMPINPUT "inputImage.bmp"
 #define BMPOUTPUT "outputImage.bmp"
 
-void editImage (unsigned char *,int,int,int);
+void editImage (unsigned char *,signed int,signed int,int);
 
 int main(int argc, char const *argv[])
 {
@@ -78,7 +78,12 @@ int main(int argc, char const *argv[])
     return 0;
 }
 
-editImage(originalImagePixels,inputHeight,inputWidth,totalPixelsOriginal)
+void editImage(unsigned char * originalImagePixels,signed int inputHeight,signed int inputWidth,int totalPixelsOriginal)
 {
-    printf("TEST\n");
+    for (int i = 0; i < totalPixelsOriginal*3; i++)
+    {
+        printf("Pixel %d = 0x%x\n",i+1,originalImagePixels[i]);
+        originalImagePixels[i] -> "FF";
+    }
+    
 }
