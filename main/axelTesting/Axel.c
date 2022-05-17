@@ -1,10 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define BMPINPUT "inputImageBig.bmp"
+#define BMPINPUT "inputImage.bmp"
 #define BMPOUTPUT "outputImage.bmp"
 
-void editImage (unsigned char *,signed int,signed int,int);
+void imageSmoothing (unsigned char *,signed int,signed int,int);
+/*
+*
+*   This functions edits the image and gets the smoothed image back.
+*
+*/
 
 int main(int argc, char const *argv[])
 {
@@ -61,7 +66,10 @@ int main(int argc, char const *argv[])
     printf("\n");
     printf("INFO: File %s CLOSED\n", BMPINPUT);
 
-    editImage(originalImagePixels,inputHeight,inputWidth,totalPixelsOriginal);
+    /*
+    *   This functions edits the image and gets the smoothed image back.
+    */
+    imageSmoothing(originalImagePixels,inputHeight,inputWidth,totalPixelsOriginal);
 
     //Writes inputHeader and originalImagePixels into the output image.
     fwrite(inputHeader,sizeof(char),sizeof(inputHeader),outputBMP);
@@ -69,7 +77,10 @@ int main(int argc, char const *argv[])
     fwrite(originalImagePixels,sizeof(char),totalPixelsOriginal*3,outputBMP);
     printf("Original image copied.\n");
 
-    //Cleanup.
+    /*
+    * Cleanup.
+    * Closes output and frees memory.
+    */
     fclose(outputBMP);
     printf("INFO: File %s CLOSED\n", BMPOUTPUT);
     free(originalImagePixels);
@@ -78,31 +89,13 @@ int main(int argc, char const *argv[])
     return 0;
 }
 
-void editImage(unsigned char * originalImagePixels,signed int inputHeight,signed int inputWidth,int totalPixelsOriginal)
+void imageSmoothing (unsigned char * originalImagePixels,signed int inputHeight,signed int inputWidth,int totalPixelsOriginal)
 {   
-    //For loop to itterate trough the height of the image.
-    for (y = 0, inputHeight<y, y++)
-    {   
-        //Checks if the image is either in the first or last line of height.
-        if(y == 0 || y == inputHeight) 
-        {
-            //Do nothing, we ingore the first and last line.
-        }
-        //If we arent on the first or last line do this.
-        else
-        {
-            for (x = 0, inputWidth<x, x++)
-            {
-                if(x == 0 || x == inputWidth) 
-                {
-                    //Do nothing, we ingore the first and last line.
-                }
-                //If we arent on the first or last line do this.
-                else
-                {
-                    /* CODE */
-                }
-            }
-        }
+    int counter = 0;
+    while(counter != (totalPixelsOriginal*3)+1)
+    {
+           
     }
+    
+    printf("\n\n\n\n%d\n",totalPixelsOriginal);
 }
