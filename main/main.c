@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define BMPINPUT "inputImage.bmp"
+#define BMPINPUT "inputImageBig.bmp"
 #define BMPOUTPUT "outputImage.bmp"
 
 
@@ -34,13 +34,11 @@ int main(int argc, char const *argv[])
 
     //Gets the header from the input file and saves it into "inputHeader"
     fread(inputHeader, 1, 54, inputBMP);
-    //Gets the pixels from the input file and saves it into "originalImagePixels"
-    fread(originalImagePixels, 1, totalPixelsOriginal*3, inputBMP);
-    
-    printf("INFO: Heap memory allocated = %d (bytes)\n", totalPixelsOriginal*3);
-    inputWidth = inputHeader[21] << 24 | inputHeader[20] << 16 | inputHeader[19] << 8 | inputHeader[18];
+
+    //Gets width and height of the input image.
+    inputWidth = inputHeader[21] << 24 | inputHeader[20] << 16 | inputHeader[19] << 8 | inputHeader[18]; 
     printf("The width of the input image: %d\n", inputWidth);
-    inputHeight = inputHeader[25] << 24 | inputHeader[24] << 16 | inputHeader[23] << 8 | inputHeader[22];
+    inputHeight = inputHeader[25] << 24 | inputHeader[24] << 16 | inputHeader[23] << 8 | inputHeader[22]; 
     printf("The height of the input image: %d\n", inputHeight);
     printf("\n");
 
@@ -53,8 +51,12 @@ int main(int argc, char const *argv[])
         return -2;
     }
 
+    //Gets the pixels from the input file and saves it into "originalImagePixels"
+    fread(originalImagePixels, 1, totalPixelsOriginal*3, inputBMP);
+    printf("INFO: Heap memory allocated = %d (bytes)\n", totalPixelsOriginal*3);
+    
     //Closes the input fine after inputHeader and originalImagePixels is copied into heap memory.
-    fclose(inputBMP);
+    fclose(inputBMP);   
     printf("\n");
     printf("INFO: File %s CLOSED\n", BMPINPUT);
 
