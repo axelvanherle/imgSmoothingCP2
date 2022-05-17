@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define BMPINPUT "inputImageBig.bmp"
+#define BMPINPUT "inputImage.bmp"
 #define BMPOUTPUT "outputImage.bmp"
 
+void editImage (unsigned char *,int,int,int);
 
 int main(int argc, char const *argv[])
 {
@@ -60,6 +61,8 @@ int main(int argc, char const *argv[])
     printf("\n");
     printf("INFO: File %s CLOSED\n", BMPINPUT);
 
+    editImage(originalImagePixels,inputHeight,inputWidth,totalPixelsOriginal);
+
     //Writes inputHeader and originalImagePixels into the output image.
     fwrite(inputHeader,sizeof(char),sizeof(inputHeader),outputBMP);
     printf("Header copied.\n");
@@ -73,4 +76,9 @@ int main(int argc, char const *argv[])
     printf("INFO: Heap memory Freed = %d (bytes)\n", totalPixelsOriginal*3);
 
     return 0;
+}
+
+editImage(originalImagePixels,inputHeight,inputWidth,totalPixelsOriginal)
+{
+    printf("TEST\n");
 }
