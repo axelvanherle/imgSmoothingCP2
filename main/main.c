@@ -66,6 +66,9 @@ int main(int argc, char const *argv[])
     printf("\n");
     printf("INFO: File %s CLOSED\n", BMPINPUT);
 
+    /*
+    *   This functions edits the image and gets the smoothed image back.
+    */
     imageSmoothing(originalImagePixels,inputHeight,inputWidth,totalPixelsOriginal);
 
     //Writes inputHeader and originalImagePixels into the output image.
@@ -74,7 +77,10 @@ int main(int argc, char const *argv[])
     fwrite(originalImagePixels,sizeof(char),totalPixelsOriginal*3,outputBMP);
     printf("Original image copied.\n");
 
-    //Cleanup.
+    /*
+    * Cleanup.
+    * Closes output and frees memory.
+    */
     fclose(outputBMP);
     printf("INFO: File %s CLOSED\n", BMPOUTPUT);
     free(originalImagePixels);
@@ -86,7 +92,7 @@ int main(int argc, char const *argv[])
 void imageSmoothing (unsigned char * originalImagePixels,signed int inputHeight,signed int inputWidth,int totalPixelsOriginal)
 {   
     //For loop to itterate trough the height of the image.
-    for (y = 0, inputHeight<y, y++)
+    for (int y = 0; inputHeight<y; y++)
     {   
         //Checks if the image is either in the first or last line of height.
         if(y == 0 || y == inputHeight) 
@@ -96,7 +102,7 @@ void imageSmoothing (unsigned char * originalImagePixels,signed int inputHeight,
         //If we arent on the first or last line do this.
         else
         {
-            for (x = 0, inputWidth<x, x++)
+            for (int x = 0; inputWidth<x; x++)
             {
                 if(x == 0 || x == inputWidth) 
                 {
