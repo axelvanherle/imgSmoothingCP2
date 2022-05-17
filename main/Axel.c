@@ -4,12 +4,7 @@
 #define BMPINPUT "inputImageBig.bmp"
 #define BMPOUTPUT "outputImage.bmp"
 
-void imageSmoothing (unsigned char *,signed int,signed int,int);
-/*
-*
-*   This functions edits the image and gets the smoothed image back.
-*
-*/
+void editImage (unsigned char *,signed int,signed int,int);
 
 int main(int argc, char const *argv[])
 {
@@ -66,7 +61,7 @@ int main(int argc, char const *argv[])
     printf("\n");
     printf("INFO: File %s CLOSED\n", BMPINPUT);
 
-    imageSmoothing(originalImagePixels,inputHeight,inputWidth,totalPixelsOriginal);
+    editImage(originalImagePixels,inputHeight,inputWidth,totalPixelsOriginal);
 
     //Writes inputHeader and originalImagePixels into the output image.
     fwrite(inputHeader,sizeof(char),sizeof(inputHeader),outputBMP);
@@ -83,7 +78,7 @@ int main(int argc, char const *argv[])
     return 0;
 }
 
-void imageSmoothing (unsigned char * originalImagePixels,signed int inputHeight,signed int inputWidth,int totalPixelsOriginal)
+void editImage(unsigned char * originalImagePixels,signed int inputHeight,signed int inputWidth,int totalPixelsOriginal)
 {   
     //For loop to itterate trough the height of the image.
     for (y = 0, inputHeight<y, y++)
