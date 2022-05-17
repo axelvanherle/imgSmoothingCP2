@@ -83,7 +83,7 @@ void editImage(unsigned char * originalImagePixels,signed int inputHeight,signed
     for (int i = 0; i < totalPixelsOriginal*3; i++)
     {
         printf("Pixel %d = 0x%x\n",i+1,originalImagePixels[i]);
-        originalImagePixels[i] -> "FF";
+        originalImagePixels[i] = 255;
     }
     
 }
