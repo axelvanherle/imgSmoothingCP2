@@ -33,6 +33,7 @@ int main(int argc, char const *argv[])
     }
 
     //Gets width and height of the input image.
+    fread(inputHeader, 1, 54, inputBMP);
     inputWidth = inputHeader[21] << 24 | inputHeader[20] << 16 | inputHeader[19] << 8 | inputHeader[18];
     printf("The width of the input image: %d\n", inputWidth);
     inputHeight = inputHeader[25] << 24 | inputHeader[24] << 16 | inputHeader[23] << 8 | inputHeader[22];
