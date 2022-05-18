@@ -92,26 +92,32 @@ int main(int argc, char const *argv[])
 void imageSmoothing (unsigned char * originalImagePixels,signed int inputHeight,signed int inputWidth,int totalPixelsOriginal)
 {   
     //For loop to itterate trough the height of the image.
-    for (int y = 0; inputHeight<y; y++)
+    for (int y = 0; inputHeight> y; y++)
     {   
         //Checks if the image is either in the first or last line of height.
-        if(y == 0 || y == inputHeight) 
+        if(y == 0 || y == inputHeight-1) 
         {
             //Do nothing, we ingore the first and last line.
+            printf("ERROR HEIGHT\n");
         }
         //If we arent on the first or last line do this.
         else
         {
-            for (int x = 0; inputWidth<x; x++)
-            {
-                if(x == 0 || x == inputWidth) 
+            for (int x = 0; inputWidth>x; x++)
+            {   
+                if(x == 0 || x == inputWidth-1) 
                 {
                     //Do nothing, we ingore the first and last line.
+                    printf("ERROR WIDTH\n");
                 }
                 //If we arent on the first or last line do this.
                 else
                 {
-                    /* CODE */
+                    for (int i = 0; i < 3; i++)
+                    {
+                        //printf("PIXEL[%d] = %x\n",((y*inputHeight+x)*3)+i,originalImagePixels[((y*inputHeight+x)*3)+i]);
+                        originalImagePixels[((y*inputHeight+x)*3)+i] = 0;
+                    }
                 }
             }
         }
