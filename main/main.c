@@ -95,6 +95,9 @@ int main(int argc, char const *argv[])
     free(editedImagePixels);
     printf("INFO: Heap memory Freed = %d (bytes)\n", totalPixelsOriginal*3);
 
+    printf("\n\n\n--------------------\n");
+    printf("Image processing done.");
+
     return 0;
 }
 
