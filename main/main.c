@@ -6,9 +6,7 @@
 
 void imageSmoothing (unsigned char *,unsigned char *,signed int,signed int,int);
 /*
-*
 *   This functions edits the image and gets the smoothed image back.
-*
 */
 
 void weirdEffect (unsigned char * originalImagePixels,signed int inputHeight,signed int inputWidth,int totalPixelsOriginal);
@@ -102,7 +100,7 @@ int main(int argc, char const *argv[])
 
 void imageSmoothing (unsigned char * originalImagePixels,unsigned char * editedImagePixels,signed int inputHeight,signed int inputWidth,int totalPixelsOriginal)
 {   
-    //These are used to store the values around the middle pixel.
+    //These are used to store the values around the middle pixel (and the middle pixel itself.).
     int pixel0[3];
     int pixel1[3];
     int pixel2[3];
@@ -179,6 +177,7 @@ void imageSmoothing (unsigned char * originalImagePixels,unsigned char * editedI
 
 void weirdEffect (unsigned char * originalImagePixels,signed int inputHeight,signed int inputWidth,int totalPixelsOriginal)
 {   
+    //STILL A WIP
     int pixel0[2];
     int pixel1[2];
     int pixel2[2];
