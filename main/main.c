@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define BMPINPUT "inputImageBW.bmp"
+#define BMPINPUT "inputImageBig.bmp"
 #define BMPOUTPUT "outputImage.bmp"
 
 void imageSmoothing (unsigned char *,unsigned char *,signed int,signed int,int);
@@ -102,6 +102,7 @@ int main(int argc, char const *argv[])
 
 void imageSmoothing (unsigned char * originalImagePixels,unsigned char * editedImagePixels,signed int inputHeight,signed int inputWidth,int totalPixelsOriginal)
 {   
+    //These are used to store the values around the middle pixel.
     int pixel0[3];
     int pixel1[3];
     int pixel2[3];
@@ -115,68 +116,60 @@ void imageSmoothing (unsigned char * originalImagePixels,unsigned char * editedI
     //For loop to itterate trough the height of the image.
     for (int y = 0; inputHeight> y; y++)
     {   
+        //For loop to itterate trough the width of the image.
         for (int x = 0; inputWidth>x; x++)
         {   
+            //Checks if we are on the edge of the image.
             if(x == 0 || x == inputWidth-1 || y == 0 || y == inputHeight-1) 
             {
                 for (int i = 0; i < 3; i++)
-                {
+                {   
+                    //If we are on the edge of the image, do this.
                     editedImagePixels[((y*inputHeight+x)*3)+i] = originalImagePixels[((y*inputHeight+x)*3)+i];
                 }
                 
             }
-            //If we arent on the first or last line do this.
+            //If we arent on the edge of the image, do this.
             else
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    //printf("PIXEL[%d] = %x\n",((y*inputHeight+x)*3)+i,originalImagePixels[((y*inputHeight+x)*3)+i]);
                     pixel0[i] = originalImagePixels[(((y-1)*inputHeight+(x-1))*3)+i];
                 }
                 for (int i = 0; i < 3; i++)
                 {
-                    //printf("PIXEL[%d] = %x\n",((y*inputHeight+x)*3)+i,originalImagePixels[((y*inputHeight+x)*3)+i]);
                     pixel1[i] = originalImagePixels[(((y-1)*inputHeight+x)*3)+i];
                 }
                 for (int i = 0; i < 3; i++)
                 {
-                    //printf("PIXEL[%d] = %x\n",((y*inputHeight+x)*3)+i,originalImagePixels[((y*inputHeight+x)*3)+i]);
                     pixel2[i] = originalImagePixels[(((y-1)*inputHeight+(x+1))*3)+i];
                 }
                 for (int i = 0; i < 3; i++)
                 {
-                    //printf("PIXEL[%d] = %x\n",((y*inputHeight+x)*3)+i,originalImagePixels[((y*inputHeight+x)*3)+i]);
                     pixel3[i] = originalImagePixels[((y*inputHeight+(x-1))*3)+i];
                 }
                 for (int i = 0; i < 3; i++)
                 {
-                    //printf("PIXEL[%d] = %x\n",((y*inputHeight+x)*3)+i,originalImagePixels[((y*inputHeight+x)*3)+i]);
                     pixel4[i] = originalImagePixels[((y*inputHeight+x)*3)+i];
                 }
                 for (int i = 0; i < 3; i++)
                 {
-                    //printf("PIXEL[%d] = %x\n",((y*inputHeight+x)*3)+i,originalImagePixels[((y*inputHeight+x)*3)+i]);
                     pixel5[i] = originalImagePixels[((y*inputHeight+(x+1))*3)+i];
                 }
                 for (int i = 0; i < 3; i++)
                 {
-                    //printf("PIXEL[%d] = %x\n",((y*inputHeight+x)*3)+i,originalImagePixels[((y*inputHeight+x)*3)+i]);
                     pixel6[i] = originalImagePixels[(((y+1)*inputHeight+(x-1))*3)+i];
                 }
                 for (int i = 0; i < 3; i++)
                 {
-                    //printf("PIXEL[%d] = %x\n",((y*inputHeight+x)*3)+i,originalImagePixels[((y*inputHeight+x)*3)+i]);
                     pixel7[i] = originalImagePixels[(((y+1)*inputHeight+x)*3)+i];
                 }
                 for (int i = 0; i < 3; i++)
                 {
-                    //printf("PIXEL[%d] = %x\n",((y*inputHeight+x)*3)+i,originalImagePixels[((y*inputHeight+x)*3)+i]);
                     pixel8[i] = originalImagePixels[(((y+1)*inputHeight+(x+1))*3)+i];
                 }
                 for (int i = 0; i < 3; i++)
                 {
-                    //printf("PIXEL[%d] = %x\n",((y*inputHeight+x)*3)+i,originalImagePixels[((y*inputHeight+x)*3)+i]);
-                    printf("%d %d %d %d %d %d %d %d %d\n",pixel0[i],pixel1[i],pixel2[i],pixel3[i],pixel4[i],pixel5[i],pixel6[i],pixel7[i],pixel8[i]);
                     editedImagePixels[((y*inputHeight+x)*3)+i] = (pixel0[i]+pixel1[i]+pixel2[i]+pixel3[i]+pixel4[i]+pixel5[i]+pixel6[i]+pixel7[i]+pixel8[i]) / 9;
                 }
             }
