@@ -197,7 +197,6 @@ void weirdEffect (unsigned char * originalImagePixels,signed int inputHeight,sig
         if(y == 0 || y == inputHeight-1) 
         {
             //Do nothing, we ingore the first and last line.
-            printf("ERROR HEIGHT\n");
         }
         //If we arent on the first or last line do this.
         else
@@ -207,7 +206,6 @@ void weirdEffect (unsigned char * originalImagePixels,signed int inputHeight,sig
                 if(x == 0 || x == inputWidth-1) 
                 {
                     //Do nothing, we ingore the first and last line.
-                    printf("ERROR WIDTH\n");
                 }
                 //If we arent on the first or last line do this.
                 else
