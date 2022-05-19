@@ -48,7 +48,7 @@ int main(int argc, char const *argv[])
     printf("The height of the input image: %d\n", inputHeight);
     printf("\n");
 
-    //Calculates the size needed to save the input image into "originalImagePixels" and mallocs it.
+    //Calculates the size needed to save the input image into "originalImagePixels" and "editedImagePixels" and mallocs it.
     totalPixelsOriginal = inputWidth * inputHeight;
 
     originalImagePixels = (unsigned char *) malloc(totalPixelsOriginal*3);
@@ -57,7 +57,6 @@ int main(int argc, char const *argv[])
         printf("ERROR: memory allocation Failed original\n");
         return -2;
     }
-
     editedImagePixels = (unsigned char *) malloc(totalPixelsOriginal*3);
     if(editedImagePixels == NULL)
     {
