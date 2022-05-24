@@ -25,6 +25,7 @@ int main(int argc, char const *argv[])
     //Variable declaration of the output file.
     FILE * outputBMP = fopen(BMPOUTPUT, "wb");
     unsigned char * editedImagePixels = NULL;
+    
     //Checks if the input image is valid.
     if(inputBMP == NULL)
     {
@@ -76,7 +77,9 @@ int main(int argc, char const *argv[])
     /*
     *   This functions edits the image and gets the smoothed image back.
     */
-    imageSmoothing(originalImagePixels,editedImagePixels,inputHeight,inputWidth,totalPixelsOriginal);
+    //imageSmoothing(originalImagePixels,editedImagePixels,inputHeight,inputWidth,totalPixelsOriginal);
+
+    weirdEffect(originalImagePixels,inputHeight,inputWidth,totalPixelsOriginal);
 
     //Writes inputHeader and originalImagePixels into the output image.
     fwrite(inputHeader,sizeof(char),sizeof(inputHeader),outputBMP);
