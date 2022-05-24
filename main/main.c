@@ -5,11 +5,16 @@
 #define BMPOUTPUT "outputImage.bmp"
 
 void imageSmoothing (unsigned char *,unsigned char *,signed int,signed int,int);
+void imageRed (unsigned char *,unsigned char *,signed int,signed int,int);
+void imageGreen (unsigned char *,unsigned char *,signed int,signed int,int);
+void imageBlue (unsigned char *,unsigned char *,signed int,signed int,int);
+void imageBlack (unsigned char *,unsigned char *,signed int,signed int,int);
+void imagechose (int,unsigned char *,unsigned char *,signed int,signed int,int);
 /*
 *   This functions edits the image and gets the smoothed image back.
 */
 
-void weirdEffect (unsigned char * originalImagePixels,signed int inputHeight,signed int inputWidth,int totalPixelsOriginal);
+
 
 int main(int argc, char const *argv[])
 {
@@ -73,11 +78,14 @@ int main(int argc, char const *argv[])
     fclose(inputBMP);   
     printf("\n");
     printf("INFO: File %s CLOSED\n", BMPINPUT);
+	
+	int chose = 0;
 
     /*
     *   This functions edits the image and gets the smoothed image back.
     */
-
+	scanf("%d",&chose);
+	imagechose (chose,originalImagePixels,editedImagePixels,inputHeight,inputWidth,totalPixelsOriginal);
     imageSmoothing(originalImagePixels,editedImagePixels,inputHeight,inputWidth,totalPixelsOriginal);
 
     //Writes inputHeader and originalImagePixels into the output image.
@@ -102,7 +110,350 @@ int main(int argc, char const *argv[])
     return 0;
 }
 
+
+void imagechose (int chose,unsigned char * originalImagePixels,unsigned char * editedImagePixels,signed int inputHeight,signed int inputWidth,int totalPixelsOriginal ){
+	
+	switch(chose){
+		case 1 :
+		imageSmoothing(originalImagePixels,editedImagePixels,inputHeight,inputWidth,totalPixelsOriginal);
+		break;
+		
+		case 2:
+		imageRed(originalImagePixels,editedImagePixels,inputHeight,inputWidth,totalPixelsOriginal);
+		break;
+		
+		case 3:
+		imageGreen(originalImagePixels,editedImagePixels,inputHeight,inputWidth,totalPixelsOriginal);
+		break;
+		
+		case 4:
+		imageBlue(originalImagePixels,editedImagePixels,inputHeight,inputWidth,totalPixelsOriginal);
+		break;
+		
+		case 5:
+		imageBlack(originalImagePixels,editedImagePixels,inputHeight,inputWidth,totalPixelsOriginal);
+		break;
+		
+		default:
+		break;
+		
+	}
+}
+
 void imageSmoothing (unsigned char * originalImagePixels,unsigned char * editedImagePixels,signed int inputHeight,signed int inputWidth,int totalPixelsOriginal)
+{   
+    //These are used to store the values around the middle pixel (and the middle pixel itself.).
+    int pixel0[3];
+    int pixel1[3];
+    int pixel2[3];
+    int pixel3[3];
+    int pixel4[3];
+    int pixel5[3];
+    int pixel6[3];
+    int pixel7[3];
+    int pixel8[3];
+
+    //For loop to itterate trough the height of the image.
+    for (int y = 0; inputHeight> y; y++)
+    {   
+        //For loop to itterate trough the width of the image.
+        for (int x = 0; inputWidth>x; x++)
+        {   
+            //Checks if we are on the edge of the image.
+            if(x == 0 || x == inputWidth-1 || y == 0 || y == inputHeight-1) 
+            {
+                for (int i = 0; i < 3; i++)
+                {   
+                    //If we are on the edge of the image, do this.
+                    editedImagePixels[((y*inputHeight+x)*3)+i] = originalImagePixels[((y*inputHeight+x)*3)+i];
+                }
+                
+            }
+            //If we arent on the edge of the image, do this.
+            else
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel0[i] = originalImagePixels[(((y-1)*inputHeight+(x-1))*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel1[i] = originalImagePixels[(((y-1)*inputHeight+x)*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel2[i] = originalImagePixels[(((y-1)*inputHeight+(x+1))*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel3[i] = originalImagePixels[((y*inputHeight+(x-1))*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel4[i] = originalImagePixels[((y*inputHeight+x)*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel5[i] = originalImagePixels[((y*inputHeight+(x+1))*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel6[i] = originalImagePixels[(((y+1)*inputHeight+(x-1))*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel7[i] = originalImagePixels[(((y+1)*inputHeight+x)*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel8[i] = originalImagePixels[(((y+1)*inputHeight+(x+1))*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    editedImagePixels[((y*inputHeight+x)*3)+i] = (pixel0[i]+pixel1[i]+pixel2[i]+pixel3[i]+pixel4[i]+pixel5[i]+pixel6[i]+pixel7[i]+pixel8[i]) / 9;
+                }
+            }
+        }
+    }
+}
+
+void imageRed (unsigned char * originalImagePixels,unsigned char * editedImagePixels,signed int inputHeight,signed int inputWidth,int totalPixelsOriginal)
+{   
+    //These are used to store the values around the middle pixel (and the middle pixel itself.).
+    int pixel0[3];
+    int pixel1[3];
+    int pixel2[3];
+    int pixel3[3];
+    int pixel4[3];
+    int pixel5[3];
+    int pixel6[3];
+    int pixel7[3];
+    int pixel8[3];
+
+    //For loop to itterate trough the height of the image.
+    for (int y = 0; inputHeight> y; y++)
+    {   
+        //For loop to itterate trough the width of the image.
+        for (int x = 0; inputWidth>x; x++)
+        {   
+            //Checks if we are on the edge of the image.
+            if(x == 0 || x == inputWidth-1 || y == 0 || y == inputHeight-1) 
+            {
+                for (int i = 0; i < 3; i++)
+                {   
+                    //If we are on the edge of the image, do this.
+                    editedImagePixels[((y*inputHeight+x)*3)+i] = originalImagePixels[((y*inputHeight+x)*3)+i];
+                }
+                
+            }
+            //If we arent on the edge of the image, do this.
+            else
+            {
+                for (int i = 0; i < 3; i++)
+                {
+					if(i == 2 ){
+                    pixel0[i] = originalImagePixels[(((y-1)*inputHeight+(x-1))*3)+i];
+					}
+					else{
+						pixel0[i] = "00";
+					}
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel1[i] = originalImagePixels[(((y-1)*inputHeight+x)*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel2[i] = originalImagePixels[(((y-1)*inputHeight+(x+1))*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel3[i] = originalImagePixels[((y*inputHeight+(x-1))*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel4[i] = originalImagePixels[((y*inputHeight+x)*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel5[i] = originalImagePixels[((y*inputHeight+(x+1))*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel6[i] = originalImagePixels[(((y+1)*inputHeight+(x-1))*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel7[i] = originalImagePixels[(((y+1)*inputHeight+x)*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel8[i] = originalImagePixels[(((y+1)*inputHeight+(x+1))*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    editedImagePixels[((y*inputHeight+x)*3)+i] = (pixel0[i]+pixel1[i]+pixel2[i]+pixel3[i]+pixel4[i]+pixel5[i]+pixel6[i]+pixel7[i]+pixel8[i]) / 9;
+                }
+            }
+        }
+    }
+}
+
+void imageGreen (unsigned char * originalImagePixels,unsigned char * editedImagePixels,signed int inputHeight,signed int inputWidth,int totalPixelsOriginal)
+{   
+    //These are used to store the values around the middle pixel (and the middle pixel itself.).
+    int pixel0[3];
+    int pixel1[3];
+    int pixel2[3];
+    int pixel3[3];
+    int pixel4[3];
+    int pixel5[3];
+    int pixel6[3];
+    int pixel7[3];
+    int pixel8[3];
+
+    //For loop to itterate trough the height of the image.
+    for (int y = 0; inputHeight> y; y++)
+    {   
+        //For loop to itterate trough the width of the image.
+        for (int x = 0; inputWidth>x; x++)
+        {   
+            //Checks if we are on the edge of the image.
+            if(x == 0 || x == inputWidth-1 || y == 0 || y == inputHeight-1) 
+            {
+                for (int i = 0; i < 3; i++)
+                {   
+                    //If we are on the edge of the image, do this.
+                    editedImagePixels[((y*inputHeight+x)*3)+i] = originalImagePixels[((y*inputHeight+x)*3)+i];
+                }
+                
+            }
+            //If we arent on the edge of the image, do this.
+            else
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel0[i] = originalImagePixels[(((y-1)*inputHeight+(x-1))*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel1[i] = originalImagePixels[(((y-1)*inputHeight+x)*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel2[i] = originalImagePixels[(((y-1)*inputHeight+(x+1))*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel3[i] = originalImagePixels[((y*inputHeight+(x-1))*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel4[i] = originalImagePixels[((y*inputHeight+x)*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel5[i] = originalImagePixels[((y*inputHeight+(x+1))*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel6[i] = originalImagePixels[(((y+1)*inputHeight+(x-1))*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel7[i] = originalImagePixels[(((y+1)*inputHeight+x)*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel8[i] = originalImagePixels[(((y+1)*inputHeight+(x+1))*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    editedImagePixels[((y*inputHeight+x)*3)+i] = (pixel0[i]+pixel1[i]+pixel2[i]+pixel3[i]+pixel4[i]+pixel5[i]+pixel6[i]+pixel7[i]+pixel8[i]) / 9;
+                }
+            }
+        }
+    }
+}
+
+void imageBlue (unsigned char * originalImagePixels,unsigned char * editedImagePixels,signed int inputHeight,signed int inputWidth,int totalPixelsOriginal)
+{   
+    //These are used to store the values around the middle pixel (and the middle pixel itself.).
+    int pixel0[3];
+    int pixel1[3];
+    int pixel2[3];
+    int pixel3[3];
+    int pixel4[3];
+    int pixel5[3];
+    int pixel6[3];
+    int pixel7[3];
+    int pixel8[3];
+
+    //For loop to itterate trough the height of the image.
+    for (int y = 0; inputHeight> y; y++)
+    {   
+        //For loop to itterate trough the width of the image.
+        for (int x = 0; inputWidth>x; x++)
+        {   
+            //Checks if we are on the edge of the image.
+            if(x == 0 || x == inputWidth-1 || y == 0 || y == inputHeight-1) 
+            {
+                for (int i = 0; i < 3; i++)
+                {   
+                    //If we are on the edge of the image, do this.
+                    editedImagePixels[((y*inputHeight+x)*3)+i] = originalImagePixels[((y*inputHeight+x)*3)+i];
+                }
+                
+            }
+            //If we arent on the edge of the image, do this.
+            else
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel0[i] = originalImagePixels[(((y-1)*inputHeight+(x-1))*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel1[i] = originalImagePixels[(((y-1)*inputHeight+x)*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel2[i] = originalImagePixels[(((y-1)*inputHeight+(x+1))*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel3[i] = originalImagePixels[((y*inputHeight+(x-1))*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel4[i] = originalImagePixels[((y*inputHeight+x)*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel5[i] = originalImagePixels[((y*inputHeight+(x+1))*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel6[i] = originalImagePixels[(((y+1)*inputHeight+(x-1))*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel7[i] = originalImagePixels[(((y+1)*inputHeight+x)*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    pixel8[i] = originalImagePixels[(((y+1)*inputHeight+(x+1))*3)+i];
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    editedImagePixels[((y*inputHeight+x)*3)+i] = (pixel0[i]+pixel1[i]+pixel2[i]+pixel3[i]+pixel4[i]+pixel5[i]+pixel6[i]+pixel7[i]+pixel8[i]) / 9;
+                }
+            }
+        }
+    }
+}
+
+void imageBlack (unsigned char * originalImagePixels,unsigned char * editedImagePixels,signed int inputHeight,signed int inputWidth,int totalPixelsOriginal)
 {   
     //These are used to store the values around the middle pixel (and the middle pixel itself.).
     int pixel0[3];
