@@ -81,12 +81,12 @@ int main(int argc, char const *argv[])
 	
 	int chose = 0;
 
-    /*
-    *   This functions edits the image and gets the smoothed image back.
-    */
-	scanf("%d",&chose);
+   
+	printf("choose your task (use the numbers)\n");
+	printf("1: Smoothing  2: Red  3: Green  4: Blue  5: BlackAndWhite\n");
+	scanf("%d\n",&chose);
 	imagechose (chose,originalImagePixels,editedImagePixels,inputHeight,inputWidth,totalPixelsOriginal);
-    imageSmoothing(originalImagePixels,editedImagePixels,inputHeight,inputWidth,totalPixelsOriginal);
+    
 
     //Writes inputHeader and originalImagePixels into the output image.
     fwrite(inputHeader,sizeof(char),sizeof(inputHeader),outputBMP);
@@ -135,6 +135,7 @@ void imagechose (int chose,unsigned char * originalImagePixels,unsigned char * e
 		break;
 		
 		default:
+		printf("error\n");
 		break;
 		
 	}
@@ -221,14 +222,7 @@ void imageRed (unsigned char * originalImagePixels,unsigned char * editedImagePi
 {   
     //These are used to store the values around the middle pixel (and the middle pixel itself.).
     int pixel0[3];
-    int pixel1[3];
-    int pixel2[3];
-    int pixel3[3];
-    int pixel4[3];
-    int pixel5[3];
-    int pixel6[3];
-    int pixel7[3];
-    int pixel8[3];
+    
 
     //For loop to itterate trough the height of the image.
     for (int y = 0; inputHeight> y; y++)
@@ -255,44 +249,12 @@ void imageRed (unsigned char * originalImagePixels,unsigned char * editedImagePi
                     pixel0[i] = originalImagePixels[(((y-1)*inputHeight+(x-1))*3)+i];
 					}
 					else{
-						pixel0[i] = "00";
+						pixel0[i] = 0;
 					}
                 }
                 for (int i = 0; i < 3; i++)
                 {
-                    pixel1[i] = originalImagePixels[(((y-1)*inputHeight+x)*3)+i];
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    pixel2[i] = originalImagePixels[(((y-1)*inputHeight+(x+1))*3)+i];
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    pixel3[i] = originalImagePixels[((y*inputHeight+(x-1))*3)+i];
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    pixel4[i] = originalImagePixels[((y*inputHeight+x)*3)+i];
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    pixel5[i] = originalImagePixels[((y*inputHeight+(x+1))*3)+i];
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    pixel6[i] = originalImagePixels[(((y+1)*inputHeight+(x-1))*3)+i];
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    pixel7[i] = originalImagePixels[(((y+1)*inputHeight+x)*3)+i];
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    pixel8[i] = originalImagePixels[(((y+1)*inputHeight+(x+1))*3)+i];
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    editedImagePixels[((y*inputHeight+x)*3)+i] = (pixel0[i]+pixel1[i]+pixel2[i]+pixel3[i]+pixel4[i]+pixel5[i]+pixel6[i]+pixel7[i]+pixel8[i]) / 9;
+                    editedImagePixels[((y*inputHeight+x)*3)+i] = pixel0[i];
                 }
             }
         }
@@ -303,14 +265,7 @@ void imageGreen (unsigned char * originalImagePixels,unsigned char * editedImage
 {   
     //These are used to store the values around the middle pixel (and the middle pixel itself.).
     int pixel0[3];
-    int pixel1[3];
-    int pixel2[3];
-    int pixel3[3];
-    int pixel4[3];
-    int pixel5[3];
-    int pixel6[3];
-    int pixel7[3];
-    int pixel8[3];
+    
 
     //For loop to itterate trough the height of the image.
     for (int y = 0; inputHeight> y; y++)
@@ -333,43 +288,16 @@ void imageGreen (unsigned char * originalImagePixels,unsigned char * editedImage
             {
                 for (int i = 0; i < 3; i++)
                 {
+					if(i == 1 ){
                     pixel0[i] = originalImagePixels[(((y-1)*inputHeight+(x-1))*3)+i];
+					}
+					else{
+						pixel0[i] = 0;
+					}
                 }
                 for (int i = 0; i < 3; i++)
                 {
-                    pixel1[i] = originalImagePixels[(((y-1)*inputHeight+x)*3)+i];
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    pixel2[i] = originalImagePixels[(((y-1)*inputHeight+(x+1))*3)+i];
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    pixel3[i] = originalImagePixels[((y*inputHeight+(x-1))*3)+i];
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    pixel4[i] = originalImagePixels[((y*inputHeight+x)*3)+i];
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    pixel5[i] = originalImagePixels[((y*inputHeight+(x+1))*3)+i];
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    pixel6[i] = originalImagePixels[(((y+1)*inputHeight+(x-1))*3)+i];
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    pixel7[i] = originalImagePixels[(((y+1)*inputHeight+x)*3)+i];
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    pixel8[i] = originalImagePixels[(((y+1)*inputHeight+(x+1))*3)+i];
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    editedImagePixels[((y*inputHeight+x)*3)+i] = (pixel0[i]+pixel1[i]+pixel2[i]+pixel3[i]+pixel4[i]+pixel5[i]+pixel6[i]+pixel7[i]+pixel8[i]) / 9;
+                    editedImagePixels[((y*inputHeight+x)*3)+i] = pixel0[i];
                 }
             }
         }
@@ -380,14 +308,6 @@ void imageBlue (unsigned char * originalImagePixels,unsigned char * editedImageP
 {   
     //These are used to store the values around the middle pixel (and the middle pixel itself.).
     int pixel0[3];
-    int pixel1[3];
-    int pixel2[3];
-    int pixel3[3];
-    int pixel4[3];
-    int pixel5[3];
-    int pixel6[3];
-    int pixel7[3];
-    int pixel8[3];
 
     //For loop to itterate trough the height of the image.
     for (int y = 0; inputHeight> y; y++)
@@ -408,45 +328,18 @@ void imageBlue (unsigned char * originalImagePixels,unsigned char * editedImageP
             //If we arent on the edge of the image, do this.
             else
             {
-                for (int i = 0; i < 3; i++)
+               for (int i = 0; i < 3; i++)
                 {
+					if(i == 0 ){
                     pixel0[i] = originalImagePixels[(((y-1)*inputHeight+(x-1))*3)+i];
+					}
+					else{
+						pixel0[i] = 0;
+					}
                 }
                 for (int i = 0; i < 3; i++)
                 {
-                    pixel1[i] = originalImagePixels[(((y-1)*inputHeight+x)*3)+i];
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    pixel2[i] = originalImagePixels[(((y-1)*inputHeight+(x+1))*3)+i];
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    pixel3[i] = originalImagePixels[((y*inputHeight+(x-1))*3)+i];
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    pixel4[i] = originalImagePixels[((y*inputHeight+x)*3)+i];
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    pixel5[i] = originalImagePixels[((y*inputHeight+(x+1))*3)+i];
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    pixel6[i] = originalImagePixels[(((y+1)*inputHeight+(x-1))*3)+i];
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    pixel7[i] = originalImagePixels[(((y+1)*inputHeight+x)*3)+i];
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    pixel8[i] = originalImagePixels[(((y+1)*inputHeight+(x+1))*3)+i];
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    editedImagePixels[((y*inputHeight+x)*3)+i] = (pixel0[i]+pixel1[i]+pixel2[i]+pixel3[i]+pixel4[i]+pixel5[i]+pixel6[i]+pixel7[i]+pixel8[i]) / 9;
+                    editedImagePixels[((y*inputHeight+x)*3)+i] = pixel0[i];
                 }
             }
         }
@@ -457,14 +350,7 @@ void imageBlack (unsigned char * originalImagePixels,unsigned char * editedImage
 {   
     //These are used to store the values around the middle pixel (and the middle pixel itself.).
     int pixel0[3];
-    int pixel1[3];
-    int pixel2[3];
-    int pixel3[3];
-    int pixel4[3];
-    int pixel5[3];
-    int pixel6[3];
-    int pixel7[3];
-    int pixel8[3];
+	int counter = 0;
 
     //For loop to itterate trough the height of the image.
     for (int y = 0; inputHeight> y; y++)
@@ -487,43 +373,29 @@ void imageBlack (unsigned char * originalImagePixels,unsigned char * editedImage
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    pixel0[i] = originalImagePixels[(((y-1)*inputHeight+(x-1))*3)+i];
+					if(originalImagePixels[(((y-1)*inputHeight+(x-1))*3)+i] <=127){
+                    counter++;
+					}
+					
+					
                 }
+				
+				for (int i = 0; i < 3; i++){
+					if(counter >= 2){
+					pixel0[i] = 0;
+					}
+					else{
+					pixel0[i] = 255;
+					}
+					if(i == 2){
+						counter = 0;
+					}
+				}
+				
+				
                 for (int i = 0; i < 3; i++)
                 {
-                    pixel1[i] = originalImagePixels[(((y-1)*inputHeight+x)*3)+i];
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    pixel2[i] = originalImagePixels[(((y-1)*inputHeight+(x+1))*3)+i];
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    pixel3[i] = originalImagePixels[((y*inputHeight+(x-1))*3)+i];
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    pixel4[i] = originalImagePixels[((y*inputHeight+x)*3)+i];
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    pixel5[i] = originalImagePixels[((y*inputHeight+(x+1))*3)+i];
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    pixel6[i] = originalImagePixels[(((y+1)*inputHeight+(x-1))*3)+i];
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    pixel7[i] = originalImagePixels[(((y+1)*inputHeight+x)*3)+i];
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    pixel8[i] = originalImagePixels[(((y+1)*inputHeight+(x+1))*3)+i];
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    editedImagePixels[((y*inputHeight+x)*3)+i] = (pixel0[i]+pixel1[i]+pixel2[i]+pixel3[i]+pixel4[i]+pixel5[i]+pixel6[i]+pixel7[i]+pixel8[i]) / 9;
+                    editedImagePixels[((y*inputHeight+x)*3)+i] = pixel0[i];
                 }
             }
         }
