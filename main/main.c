@@ -9,7 +9,7 @@ void imageRed (unsigned char *,unsigned char *,signed int,signed int,int);
 void imageGreen (unsigned char *,unsigned char *,signed int,signed int,int);
 void imageBlue (unsigned char *,unsigned char *,signed int,signed int,int);
 void imageBlack (unsigned char *,unsigned char *,signed int,signed int,int);
-void imagechose (int,unsigned char *,unsigned char *,signed int,signed int,int);
+void chooseEffect (int,unsigned char *,unsigned char *,signed int,signed int,int);
 /*
 *   This functions edits the image and gets the smoothed image back.
 */
@@ -79,13 +79,19 @@ int main(int argc, char const *argv[])
     printf("\n");
     printf("INFO: File %s CLOSED\n", BMPINPUT);
 	
-	int chose = 0;
+	int userChoiceEffect = 0;
 
-   
-	printf("choose your task (use the numbers)\n");
-	printf("1: Smoothing  2: Red  3: Green  4: Blue  5: BlackAndWhite\n");
-	scanf("%d\n",&chose);
-	imagechose (chose,originalImagePixels,editedImagePixels,inputHeight,inputWidth,totalPixelsOriginal);
+   printf("\n=====================================\n");
+	printf("Choose which effect you want to use.\n\n");
+    printf("[1] - Smoothe the image.\n");
+    printf("[2] - Apply a red filter to the image.\n");
+    printf("[3] - Apply a green filter to  the image.\n");
+    printf("[4] - Apply a blue filter to  the image.\n");
+    printf("[5] - Apply a black and white filter to  the image.\n");
+    fflush(stdin);
+    printf("\nEnter your choice ==> ");
+	scanf("%d",&userChoiceEffect);
+	chooseEffect (userChoiceEffect,originalImagePixels,editedImagePixels,inputHeight,inputWidth,totalPixelsOriginal);
     
 
     //Writes inputHeader and originalImagePixels into the output image.
@@ -111,9 +117,9 @@ int main(int argc, char const *argv[])
 }
 
 
-void imagechose (int chose,unsigned char * originalImagePixels,unsigned char * editedImagePixels,signed int inputHeight,signed int inputWidth,int totalPixelsOriginal ){
+void chooseEffect (int userChoiceEffect,unsigned char * originalImagePixels,unsigned char * editedImagePixels,signed int inputHeight,signed int inputWidth,int totalPixelsOriginal ){
 	
-	switch(chose){
+	switch(userChoiceEffect){
 		case 1 :
 		imageSmoothing(originalImagePixels,editedImagePixels,inputHeight,inputWidth,totalPixelsOriginal);
 		break;
