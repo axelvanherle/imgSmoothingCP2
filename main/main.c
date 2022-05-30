@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define BMPINPUT "inputImageBig.bmp"
+
 #define BMPOUTPUT "outputImage.bmp"
 
 void imageSmoothing (unsigned char *,unsigned char *,signed int,signed int,int);
@@ -19,6 +19,10 @@ void chooseEffect (int,unsigned char *,unsigned char *,signed int,signed int,int
 int main(int argc, char const *argv[])
 {
     //Variable declaration of the input file.
+	char BMPINPUT[20]; 
+	printf("which file do you want to change?\n");
+	scanf("%s",&BMPINPUT);
+	
     FILE * inputBMP = fopen(BMPINPUT, "rb");
 
     signed int inputHeight = 0;
