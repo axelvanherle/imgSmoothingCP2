@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <string.h>
 
 #define BMPOUTPUT "outputImage.bmp"
 
@@ -21,9 +21,32 @@ int main(int argc, char const *argv[])
 {
     //Variable declaration of the input file.
     //Gets the file to edit.
-	char BMPINPUT[20]; 
+    char BMPINPUT[30];
+    int userChoice;
 	printf("which file do you want to change?\n");
-	scanf("%s",&BMPINPUT);
+    printf("[ 1 ] -- Big image, color. (400x400)\n");
+    printf("[ 2 ] -- Small image, color. (4x4)\n");
+    printf("[ 3 ] -- Small image, black and white. (8x8)\n");
+	scanf("%d",&userChoice);
+
+    if(userChoice == 1)
+    {
+        strcpy(BMPINPUT,"inputImageBig.bmp");
+    }
+    else if(userChoice == 2)
+    {
+        strcpy(BMPINPUT,"inputImage.bmp");
+    }
+    else if(userChoice == 3)
+    {
+        strcpy(BMPINPUT,"inputImageBW.bmp");
+    }
+    else
+    {
+        printf("\nNot a valueable choice, defaulted to option 1.");
+        strcpy(BMPINPUT,"inputImageBig.bmp");
+    }
+    printf("\n\n");
     FILE * inputBMP = fopen(BMPINPUT, "rb");
     signed int inputHeight = 0;
     signed int inputWidth = 0;
