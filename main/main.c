@@ -4,27 +4,27 @@
 
 #define BMPOUTPUT "outputImage.bmp"
 
+/*
+*   These functions edits the image and gets the edited image back.
+*   Names are self explanitory.
+*/
 void imageSmoothing (unsigned char *,unsigned char *,signed int,signed int,int);
 void imageRed (unsigned char *,unsigned char *,signed int,signed int,int);
 void imageGreen (unsigned char *,unsigned char *,signed int,signed int,int);
 void imageBlue (unsigned char *,unsigned char *,signed int,signed int,int);
 void imageBlack (unsigned char *,unsigned char *,signed int,signed int,int);
 void chooseEffect (int,unsigned char *,unsigned char *,signed int,signed int,int);
-/*
-*   This functions edits the image and gets the smoothed image back.
-*/
 
 
 
 int main(int argc, char const *argv[])
 {
     //Variable declaration of the input file.
+    //Gets the file to edit.
 	char BMPINPUT[20]; 
 	printf("which file do you want to change?\n");
 	scanf("%s",&BMPINPUT);
-	
     FILE * inputBMP = fopen(BMPINPUT, "rb");
-
     signed int inputHeight = 0;
     signed int inputWidth = 0;
     int totalPixelsOriginal = 0;
